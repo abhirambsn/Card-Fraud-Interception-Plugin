@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import { AdminDashboard } from "./AdminDashboard";
 import { UserDashboard } from "./UserDashboard";
 import { LocalData } from "../Data";
@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
 export default function LoginPage() {
+
   // useState hooks
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +24,7 @@ export default function LoginPage() {
       setIsLoggedIn(true);
     }
   }, []);
+  
   // change state
   const changeUsername = (event) => {
     setUsername(event.target.value);
