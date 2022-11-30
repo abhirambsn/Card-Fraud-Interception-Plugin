@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 export const AdminContent = (props) => {
-  const { editingUser, setEditingUser, setEditModal, setDeleteUser } = props;
-
+  const {editingUser, setEditingUser, setEditModal, setDeleteUser } = props;
+  
   const users = useLoaderData();
   const [isAdmin, setIsAdmin] = useState(false);
 

@@ -3,8 +3,8 @@ import { AdminDashboard } from "./AdminDashboard";
 import { UserDashboard } from "./UserDashboard";
 import { LocalData } from "../Data";
 import { Logo } from "./Logo";
-import { toast } from "react-toastify";
 import axios from "axios";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
@@ -20,7 +20,9 @@ export default function LoginPage() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
+    console.log('Use effect in effect')
+    console.log(token)
+    if(token) {
       setIsLoggedIn(true);
     }
   }, []);
@@ -83,6 +85,7 @@ export default function LoginPage() {
 
   // Redirect to corresponding pages
   if (isLoggedIn) {
+    console.log('Is logged in checking')
     localStorage.setItem("currUser", JSON.stringify(currUser));
     if (isAdmin) {
       window.location = "/admin";
