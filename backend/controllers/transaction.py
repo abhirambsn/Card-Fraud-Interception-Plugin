@@ -10,7 +10,7 @@ from models.atm import Atm
 from db import db
 from argon2 import PasswordHasher
 from sqlalchemy import select, insert, update
-from datetime import datetime
+from datetime import datetime, timezone
 from util import computeDistance, isWithinLimit
 import pandas as pd
 import numpy as np
@@ -75,7 +75,7 @@ def verify_Account(data):
     edate = datetime.strptime(data['exp_date'], '%y-%M-%d')
     exp_date = datetime.combine(edate, datetime.min.time())
     or_exp_date = datetime.combine(cardDetails.exp_date, datetime.min.time())
-    if (cardDetails.card_no != data['card_no'] or cardDetails.cvv != data['cvv'] or cardDetails.pin != data['pin'] or or_exp_date < exp_date):
+    if (cardDetails.card_no != data['card_no'] or cardDetails.cvv != data['cvv'] or cardDetails.pin != data['pin'] or or_exp_date.month != exp_date.month or or_exp_date.year != exp_date.year):
         return False
     return True
 
@@ -160,7 +160,7 @@ def withdraw(current_user, isAdmin):
                 avail = a
             amount = float(debitData['amount'])
             if avail < amount:
-                return jsonify({"error": "Balance insufficient"})
+                return jsonify({"error": "Balance insufficient"}),400
             else:
                 query = update(Customer).where(
                     Customer.customer_id == username).values(balance=avail-amount)
@@ -171,7 +171,7 @@ def withdraw(current_user, isAdmin):
                     from_acc=custDetails.account_no,
                     to_acc="000000",
                     amount=amount,
-                    timestamp=datetime.now().strftime("%Y-%m-%d")
+                    timestamp=datetime.now(tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
                 )
                 db.session.execute(query)
 
@@ -250,7 +250,7 @@ def transfer(current_user, isAdmin):
                         from_acc=custDetails.account_no,
                         to_acc=to_acc,
                         amount=amount,
-                        timestamp=datetime.now().strftime("%Y-%m-%d")
+                        timestamp=datetime.now(tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
                     )
                     db.session.execute(query)
                     db.session.commit()
