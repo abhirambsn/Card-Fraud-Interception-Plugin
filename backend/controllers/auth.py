@@ -21,8 +21,8 @@ auth_bp = Blueprint('authentication_blueprint', __name__)
 @auth_bp.route('/', methods=["GET", "OPTIONS"])
 @token_required
 def getProfile(current_user, isAdmin):
-    if not isAdmin:
-        return jsonify({'msg': 'Unauthorized'}),401
+    # if not isAdmin:
+    #     return jsonify({'msg': 'Unauthorized'}),401
     customer_dt_stmt = select(Customer).where(
         Customer.customer_id == current_user)
     customer_dset = db.session.execute(customer_dt_stmt)
@@ -46,7 +46,7 @@ def getProfile(current_user, isAdmin):
     del card['_sa_instance_state']
 
     txnData = []
-    for td in txn_dset:
+    for td in txn_dset.scalars():
         td = vars(td)
         del td['_sa_instance_state']
         txnData.append(td)
@@ -64,13 +64,15 @@ def login():
     customer_id = body['customer_id']
     password = body['password']
     if customer_id == 'admin' and password == 'admin':
-        token = api_jwt.encode({'customer_data': customer_id, 'is_admin': True}, "secret_key", algorithm="HS256")
-        return jsonify({'token': token, 'msg': "Welcome Admin"}), 200
+        token = api_jwt.encode(
+            {'customer_data': customer_id, 'is_admin': True}, "secret_key", algorithm="HS256")
+        return jsonify({'token': token, 'msg': "Welcome Admin", "is_admin": True}), 200
     customer_data_stmt = select(Customer).where(
         Customer.customer_id == customer_id)
     customer_dataset = db.session.execute(customer_data_stmt)
     customer_data = None
     for cd in customer_dataset.scalars():
+        print(cd)
         customer_data = cd
     pwd_hash = customer_data.password
     ph = PasswordHasher()
@@ -78,7 +80,7 @@ def login():
         ph.verify(pwd_hash, password)
         token = api_jwt.encode(
             {"customer_data": customer_id, 'is_admin': False}, "secret_key", algorithm="HS256")
-        return jsonify({'token': token, "msg": f"Welcome {customer_data.full_name}"}), 200
+        return jsonify({'token': token, "msg": f"Welcome {customer_data.full_name}", "is_admin": False}), 200
     except argon2.exceptions.VerifyMismatchError as e:
         return jsonify({'error': "Invalid Credentials"}), 401
 

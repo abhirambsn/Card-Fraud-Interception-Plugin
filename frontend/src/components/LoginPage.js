@@ -1,7 +1,4 @@
-import React, {useEffect, useState } from "react";
-import { AdminDashboard } from "./AdminDashboard";
-import { UserDashboard } from "./UserDashboard";
-import { LocalData } from "../Data";
+import React, { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -60,8 +57,6 @@ export default function LoginPage() {
       { withCredentials: true }
     );
 
-    alert(Object.keys(request.data));
-
     if (request.status !== 200) {
       return false;
     } else {
@@ -72,15 +67,6 @@ export default function LoginPage() {
       toast.success(request.data?.msg, { position: "top-center" });
       return true;
     }
-  };
-
-  // Logout function
-  const logout = () => {
-    setIsLoggedIn(false);
-    setIsAdmin(false);
-    localStorage.removeItem("currUser");
-    localStorage.removeItem("token");
-    toast.success("You have logged out", { position: "top-center" });
   };
 
   // Redirect to corresponding pages
@@ -117,7 +103,7 @@ export default function LoginPage() {
             type="password"
           />
 
-          <button type="submit" className="btn">
+          <button type="submit" className="btn green">
             Login
           </button>
         </form>

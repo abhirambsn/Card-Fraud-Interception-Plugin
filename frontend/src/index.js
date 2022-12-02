@@ -9,6 +9,9 @@ import { CreateAccount } from "./components/CreateAccount";
 import { TransferPage } from "./components/TransferPage";
 import { TransactPage } from "./components/TransactPage";
 import axios from "axios";
+// import { UserDashboard } from "./components/UserDashboard";
+import { UserContent } from "./components/UserContent";
+import { Notifications } from "react-push-notification";
 
 const loadAdminData = async () => {
   const token = localStorage.getItem("token");
@@ -23,6 +26,19 @@ const loadAdminData = async () => {
 
   console.log(user_req.data);
   return user_req.data;
+};
+
+const loadUserData = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+
+  const req = await axios.get("http://localhost:5000/auth/", {
+    headers: {
+      "x-access-token": token,
+    },
+  });
+  console.log(req.data);
+  return req.data;
 };
 
 const router = createBrowserRouter([
@@ -45,11 +61,6 @@ const router = createBrowserRouter([
     loader: loadAdminData,
   },
   {
-    path: "/transfer",
-    element: <TransferPage />,
-    loader: loadAdminData,
-  },
-  {
     path: "/deposit",
     element: <TransactPage type="add" page="deposit" />,
     loader: loadAdminData,
@@ -57,12 +68,22 @@ const router = createBrowserRouter([
   {
     path: "/withdraw",
     element: <TransactPage type="subtract" page="withdraw" />,
-    loader: loadAdminData,
+    loader: loadUserData,
+  },
+  {
+    path: "/dashboard",
+    element: <UserContent />,
+    loader: loadUserData,
+  },
+  {
+    path: "/transfer",
+    element: <TransferPage />,
   },
 ]);
 
 ReactDOM.render(
   <React.StrictMode>
+    <Notifications />
     <RouterProvider router={router} />
   </React.StrictMode>,
   document.getElementById("root")
