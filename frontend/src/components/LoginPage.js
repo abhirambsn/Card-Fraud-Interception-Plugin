@@ -92,6 +92,7 @@ export default function LoginPage() {
             onChange={changeUsername}
             value={username}
             type="text"
+            placeholder="Enter Customer ID"
           />
 
           <label htmlFor="password">Password</label>
@@ -101,6 +102,7 @@ export default function LoginPage() {
             onChange={changePassword}
             value={password}
             type="password"
+            placeholder="Enter Password"
           />
 
           <button type="submit" className="btn green">

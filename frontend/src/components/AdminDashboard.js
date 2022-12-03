@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useLayoutEffect, useState } from "react";
+import AdminSidebar from "./AdminSidebar";
 
 toast.configure();
 
@@ -37,46 +38,17 @@ export const AdminDashboard = () => {
   return (
     <>
       <main>
-        <section id="side-menu">
-          <Logo />
-          <ul>
-            <li>
-              <Link to="/admin">
-                <i className="bx bx-home"></i> Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/create-account">
-                <i className="bx bx-user-pin"></i> Create Account
-              </Link>
-            </li>
-            <li>
-              <Link
-                onClick={() => {
-                  localStorage.removeItem("token");
-                  localStorage.removeItem("currUser");
-                  window.location = "/";
-                }}
-              >
-                <i className="bx bx-log-out"></i> Logout
-              </Link>
-            </li>
-          </ul>
-        </section>
-        <section style={{ margin: "1.5rem" }}>
+        <AdminSidebar active={1} />
+        <section className="render-data-analysis">
           <h2>Transaction Data Analysis</h2>
           {loading ? (
             <span style={{ textAlign: "center" }}>Loading...</span>
           ) : (
-            <div>
+            <div className="render-data-div">
               <img src={stats?.image} alt="Analysis" height={700} width={900} />
-              <h3 style={{ marginTop: "10px" }}>Statistics</h3>
+              <h2 style={{ marginTop: "10px" }}>Statistics</h2>
               <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
+                className="transactions-data"
               >
                 <div>
                   <h4 style={{ marginTop: "4px" }}>Max Transactions</h4>
