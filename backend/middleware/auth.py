@@ -22,6 +22,6 @@ def token_required(f):
         except Exception as e:
             print(e)
             return jsonify({
-                'message': "Invalid Token!"
+                'message': "Invalid Token!", "error": str(e)
             }), 401
     return decorated
