@@ -50,7 +50,7 @@ export const TransactPage = (props) => {
 
   const performWithdrawl = async (loc) => {
     const wRequest = await axios.post(
-      "http://localhost:5000/txn/withdraw",
+      "https://cc-interception-backend.onrender.com/txn/withdraw",
       {
         card_no: cardNo,
         exp_data: expDate,
@@ -84,7 +84,7 @@ export const TransactPage = (props) => {
       if (amount > 0) {
         try {
           const request = await axios.post(
-            "http://localhost:5000/txn/processWithdraw",
+            "https://cc-interception-backend.onrender.com/txn/processWithdraw",
             {
               atm,
               //   lat: loc.coords.latitude,
