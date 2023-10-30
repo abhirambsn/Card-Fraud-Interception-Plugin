@@ -15,7 +15,7 @@ export const UserContent = () => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const req = await axios.get("http://localhost:5000/auth/", {
+      const req = await axios.get("https://cc-interception-backend.onrender.com/auth/", {
         headers: {
           "x-access-token": token,
         },
