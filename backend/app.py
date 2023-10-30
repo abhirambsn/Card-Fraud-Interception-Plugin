@@ -6,8 +6,7 @@ from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, resources={r"/*": {"origins": "*", "allow_headers": "*",
-         "expose_headers": "*", 'SECRET_KEY': 'abcdefgjh'}}, supports_credentials=True)
+    CORS(app, supports_credentials=True)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:cc-fraud-interception@db.gmoqgpzbqmvhimcnfchy.supabase.co:5432/postgres"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
