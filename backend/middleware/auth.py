@@ -15,6 +15,7 @@ def token_required(f):
         try:
             # app.config['SECRET_KEY']
             data = jwt.decode(token, "secret_key", algorithms="HS256")
+            print(f"JWT Decoded: {data}")
             current_user = data['customer_data']
             isAdmin = data['is_admin']
             return f(current_user, isAdmin, *args, **kwargs)
