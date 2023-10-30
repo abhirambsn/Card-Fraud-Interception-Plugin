@@ -70,6 +70,8 @@ def verify_Account(data):
     cardDetails = None
     for c in card_dset.scalars():
         cardDetails = c
+    print("Have", cardDetails.card_no, cardDetails.cvv, cardDetails.pin)
+    print("Got", data)
     if cardDetails is None:
         return False
     if (cardDetails.card_no != data['card_no'] or cardDetails.cvv != data['cvv'] or cardDetails.pin != data['pin']):
