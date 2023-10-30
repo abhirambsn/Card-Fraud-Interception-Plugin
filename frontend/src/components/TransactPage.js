@@ -23,6 +23,7 @@ export const TransactPage = (props) => {
   const [atm, setAtm] = useState("");
 
   const token = localStorage.getItem("token");
+  console.log("Auth Token", token)
   const client = useLoaderData();
 
   const location = useLocation();
