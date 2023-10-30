@@ -27,7 +27,7 @@ export const TransferPage = () => {
     e.preventDefault();
     try {
       const wRequest = await axios.post(
-        "http://localhost:5000/txn/transfer",
+        "https://cc-interception-backend.onrender.com/txn/transfer",
         {
           card_no: cardNo,
           exp_data: expDate,
