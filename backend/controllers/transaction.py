@@ -77,7 +77,7 @@ def verify_Account(data):
     return True
 
 
-@transaction_bp.route('/processWithdraw', methods=['POST'])
+@transaction_bp.route('/processWithdraw', methods=['POST', 'OPTIONS'])
 @token_required
 def processWithdraw(current_user, isAdmin):
     body = request.json
@@ -101,7 +101,7 @@ def processWithdraw(current_user, isAdmin):
     return jsonify({'msg': "Proceed with Transaction"}), 200
 
 
-@transaction_bp.route("/withdraw", methods=["POST"])
+@transaction_bp.route("/withdraw", methods=["POST", 'OPTIONS'])
 @token_required
 def withdraw(current_user, isAdmin):
     # to debit the amount from ATM
@@ -179,7 +179,7 @@ def withdraw(current_user, isAdmin):
         "msg": "Wrong account details"
     })), 401
 
-@transaction_bp.route("/transfer", methods=["POST"])
+@transaction_bp.route("/transfer", methods=["POST", 'OPTIONS'])
 @token_required
 def transfer(current_user, isAdmin):
     debitData = request.json
