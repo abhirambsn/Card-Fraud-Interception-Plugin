@@ -18,7 +18,7 @@ const loadAdminData = async () => {
   console.log("Token is ", token);
   if (!token) return;
 
-  const user_req = await axios.get("http://localhost:5000/auth/alluser", {
+  const user_req = await axios.get("https://cc-interception-backend.onrender.com/auth/alluser", {
     headers: {
       "x-access-token": token,
     },
@@ -32,7 +32,7 @@ const loadUserData = async () => {
   const token = localStorage.getItem("token");
   if (!token) return;
 
-  const req = await axios.get("http://localhost:5000/auth/", {
+  const req = await axios.get("https://cc-interception-backend.onrender.com/auth/", {
     headers: {
       "x-access-token": token,
     },
