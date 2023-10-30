@@ -3,7 +3,7 @@ Flask-SQLAlchemy
 Flask-Cors
 gunicorn
 psycopg2
-argon2
+argon2-cffi
 pandas
 numpy
 matplotlib
