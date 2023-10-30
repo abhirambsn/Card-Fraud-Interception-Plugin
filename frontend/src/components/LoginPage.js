@@ -49,7 +49,7 @@ export default function LoginPage() {
   // Login success
   const loginSuccess = async (username, password) => {
     const request = await axios.post(
-      "http://localhost:5000/auth/",
+      "https://cc-interception-backend.onrender.com/auth/",
       {
         customer_id: username,
         password,
