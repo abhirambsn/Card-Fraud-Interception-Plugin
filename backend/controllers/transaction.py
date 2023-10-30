@@ -115,6 +115,7 @@ def withdraw(current_user, isAdmin):
     exp_date = f"{yr}-{mth}-28"
     pin = debitData['pin']
     atm = debitData['atm']
+    print(debitData)
     atm_data = select(Atm).where(Atm.atm_id == atm)
     atm_dset = db.session.execute(atm_data)
     atm = None
