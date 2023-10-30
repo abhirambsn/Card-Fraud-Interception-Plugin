@@ -118,9 +118,9 @@ export const TransactPage = (props) => {
               onClick: async () => {
                 const x = window.confirm("Confirm Transaction Approval?");
                 if (x) {
-                  // setClicked(true);
-                  await performWithdrawl(loc);
                   setClicked(true);
+                  await performWithdrawl(loc);
+                  // setClicked(true);
                   window.location = "/";
                 } else {
                   setClicked(true);
