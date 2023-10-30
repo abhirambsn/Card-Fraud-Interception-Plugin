@@ -31,7 +31,7 @@ export const CreateAccount = (props) => {
       // localStorage.setItem('users', JSON.stringify(users));
 
       const cu_req = await axios.post(
-        "http://localhost:5000/auth/register",
+        "https://cc-interception-backend.onrender.com/auth/register",
         user
       );
       console.log(cu_req);
