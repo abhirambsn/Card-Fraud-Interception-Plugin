@@ -21,7 +21,7 @@ export const AdminDashboard = () => {
         return;
       }
       try {
-        const req = await axios.get("http://localhost:5000/txn/stats", {
+        const req = await axios.get("https://cc-interception-backend.onrender.com/txn/stats", {
           headers: {
             "x-access-token": token,
           },
