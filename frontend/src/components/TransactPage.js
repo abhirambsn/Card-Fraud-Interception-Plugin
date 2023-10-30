@@ -29,7 +29,7 @@ export const TransactPage = (props) => {
 
   useLayoutEffect(() => {
     (async () => {
-      const req = await axios.get("http://localhost:5000/txn/getatms");
+      const req = await axios.get("https://cc-interception-backend.onrender.com/txn/getatms");
       setAtms(req.data);
     })();
   }, [location]);
