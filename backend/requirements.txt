@@ -4,3 +4,8 @@ Flask-Cors
 gunicorn
 psycopg2
 argon2
+pandas
+numpy
+matplotlib
+pyjwt
+textwrap
